@@ -54,7 +54,7 @@ db.password=nacos
 -Dnacos.standalone=true
 ```
 
-![image-20191220095723553](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20191220095723553.png)
+![image-20191220095723553](nacos_MySQL-8.0.assets/setting3.png)
 
 注：此时启动可能不报错，但并不能证明MySQL已连接（derby）
 
@@ -64,11 +64,11 @@ db.password=nacos
 
 登陆后进入
 
-![image-20191220100750213](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20191220100750213.png)
+![image-20191220100750213](nacos_MySQL-8.0.assets/setting4.png)
 
 新建后查看MySQL数据库，tenant_info表，当表中存在数据，则已经成功连接MySQL
 
-![image-20191220100922498](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20191220100922498.png)
+![image-20191220100922498](nacos_MySQL-8.0.assets/setting5.png)
 
 注：新建命名空间显示成功时，不能起到验证效果，依然是因为derby。
 
@@ -82,7 +82,7 @@ mvn -Prelease-nacos clean install -U
 
 打包后将naocs文件扔到Linux中
 
-![image-20191220101557495](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20191220101557495.png)
+![image-20191220101557495](nacos_MySQL-8.0.assets/setting6.png)
 
 按常规方式配置  **/nacos/conf/application.properties 文件  
 
