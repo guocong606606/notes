@@ -29,3 +29,4 @@ REVOKE privilege ON databasename.tablename FROM 'username'@'host';
 ```sql
 DROP USER 'username'@'host';
 ```
+
