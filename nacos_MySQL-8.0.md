@@ -44,7 +44,7 @@ db.password=nacos
 
 ​		1.不连接MySQL的情况下，nacos会使用derby（内存库）
 
-​		2.连接MySQL-8.0+ ，须注设置Timezone
+​		2.连接MySQL-8.0+ ，须设置Timezone
 
 ## idea启动：
 
