@@ -126,3 +126,34 @@ nameList = list
     .collect(Collectors.toList());
 ```
 
+##  去重
+
+### distinct
+
+```java
+User user4 = new User();
+user4.setId(4).setAge(30).setName("Axxx");
+list.add(user4);
+// 单属性list去重
+List<String> distinctList = nameList
+    .stream()
+    .distinct()
+    .collect(Collectors.toList());
+```
+
+### 自定义去重
+
+```java
+public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+    Map<Object, Boolean> seen = new ConcurrentHashMap<>();
+    return object -> seen.putIfAbsent(keyExtractor.apply(object), Boolean.TRUE) == null;
+}
+```
+
+```java
+List<User> distinctUsers = users
+    .stream()
+    .filter(distinctByKey(User::getName))
+    .collect(Collectors.toList());
+```
+
