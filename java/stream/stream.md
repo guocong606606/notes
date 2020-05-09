@@ -115,7 +115,7 @@ User result = list
 
 ## map
 
-+ list提取值
++ list提取
 
 ```java
 // 取姓名
@@ -124,6 +124,14 @@ nameList = list
     .stream()
     .map(User::getName)
     .collect(Collectors.toList());
+
+// 转大写（小写toLowerCase） 均可结合去重，排序等
+List<String> upperCase = new ArrayList<>();
+upperCase = nameList
+    .stream()
+    .map(String::toUpperCase)
+    .collect(Collectors.toList());
+
 ```
 
 ##  去重
@@ -155,5 +163,29 @@ List<User> distinctUsers = users
     .stream()
     .filter(distinctByKey(User::getName))
     .collect(Collectors.toList());
+```
+
+## skip & limit
+
++ skip 跳过元素
++ limit 取元素数
++ 本质上是去除前n个元素和取前n个元素，所以理论上结合使用可以实现分页
+
+```java
+List<Integer> list = new ArrayList<>();
+      list.add(1);
+      list.add(2);
+      list.add(3);
+      list.add(4);
+      list.add(5);
+      list.add(6);
+List<Integer> result = new ArrayList<>();
+// 3,4,5,6
+result = list.stream().skip(2).collect(Collectors.toList());
+// 1,2
+result = list.stream().limit(2).collect(Collectors.toList());
+// 3,4
+result = list.stream().skip(2).limit(2).collect(Collectors.toList());
+
 ```
 
