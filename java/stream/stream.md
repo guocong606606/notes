@@ -115,7 +115,7 @@ User result = list
 
 ## map
 
-+ list提取
++ list提取值
 
 ```java
 // 取姓名
