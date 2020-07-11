@@ -1,4 +1,4 @@
-# elasticSearch索引模板
+# jsonelasticSearch索引模板
 
 ## 内容
 
@@ -45,5 +45,208 @@ HEAD _template/template_name
 
 ```
 DELETE _template/template_name	// 删除上述创建的模板
+```
+
+
+
+### job
+
+```json
+{
+	"index_patterns": [
+		"search_jobs"
+	],
+	"settings": {
+		"number_of_shards": "5",
+		"number_of_replicas": "1",
+		"analysis": {
+			"analyzer": {
+				"optimizeIK": {
+					"type": "custom",
+					"tokenizer": "ik_max_word",
+					"filter": [
+						"stemmer"
+					]
+				}
+			}
+		}
+	},
+	"mappings": {
+		"properties": {
+			"industryCode": {
+				"type": "text"
+			},
+			"jobType": {
+				"type": "long"
+			},
+			"jobEnText": {
+				"type": "text",
+				"analyzer": "optimizeIK"
+			},
+			"sexValue": {
+				"type": "text"
+			},
+			"jobChName": {
+				"type": "text"
+			},
+			"salaryMin": {
+				"type": "long"
+			},
+			"sexCh": {
+				"type": "text"
+			},
+			"jobEnName": {
+				"type": "text"
+			},
+			"ageMax": {
+				"type": "long"
+			},
+			"rest": {
+				"type": "text"
+			},
+			"sexEn": {
+				"type": "text"
+			},
+			"ageMin": {
+				"type": "long"
+			},
+			"salaryMax": {
+				"type": "long"
+			},
+			"typeValue": {
+				"type": "long"
+			},
+			"industryEnName": {
+				"type": "text"
+			},
+			"industryChName": {
+				"type": "text"
+			},
+			"jobId": {
+				"type": "long"
+			},
+			"jobChText": {
+				"type": "text",
+				"analyzer": "optimizeIK"
+			},
+			"updateTime": {
+				"type": "timestamp"
+			},
+			"countryPasses": {
+				"type": "nested",
+				"properties": {
+					"countryId": {
+						"type": "long"
+					},
+					"passId": {
+						"type": "long"
+					},
+					"passChName": {
+						"type": "text"
+					},
+					"passEnName": {
+						"type": "text"
+					}
+				}
+			},
+			"subwayBoList": {
+				"type": "nested",
+				"properties": {
+					"subwayId": {
+						"type": "long"
+					},
+					"subwayChName": {
+						"type": "text"
+					},
+					"subwayEnName": {
+						"type": "text"
+					}
+				}
+			}
+		}
+	}
+}
+```
+
+
+
+### customer
+
+```json
+{
+	"index_patterns": [
+		"search_customers"
+	],
+	"settings": {
+		"number_of_shards": "5",
+		"number_of_replicas": "1"
+	},
+	"mappings": {
+		"properties": {
+			"customerId": {
+				"type": "long"
+			},
+			"cnName": {
+				"type": "text"
+			},
+			"enName": {
+				"type": "text"
+			},
+			"countryValue": {
+				"type": "long"
+			},
+			"countryChName": {
+				"type": "text"
+			},
+			"countryEnName": {
+				"type": "text"
+			},
+			"sexValue": {
+				"type": "long"
+			},
+			"hometownCode": {
+				"type": "text"
+			},
+			"hometown": {
+				"type": "text"
+			},
+			"sexCh": {
+				"type": "text"
+			},
+			"sexEn": {
+				"type": "text"
+			},
+			"age": {
+				"type": "long"
+			},
+			"personalDescription": {
+				"type": "text"
+			},
+			"industries": {
+				"type": "nested",
+				"properties": {
+					"industryCode": {
+						"type": "text"
+					},
+					"industryChName": {
+						"type": "text"
+					},
+					"industryEnName": {
+						"type": "text"
+					},
+					"parentCode": {
+						"type": "text"
+					},
+					"parentChName": {
+						"type": "text"
+					},
+					"parentEnName": {
+						"type": "text"
+					}
+				}
+			}
+		}
+	}
+}
 ```
 

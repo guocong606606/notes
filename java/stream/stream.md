@@ -179,6 +179,9 @@ List<Integer> list = new ArrayList<>();
       list.add(4);
       list.add(5);
       list.add(6);
+// 效果同上
+List<Integer> list = Stream.of(1,2,3,4,5).collect(Collectors.toList());
+
 List<Integer> result = new ArrayList<>();
 // 3,4,5,6
 result = list.stream().skip(2).collect(Collectors.toList());
