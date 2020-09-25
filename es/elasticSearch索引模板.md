@@ -1,4 +1,4 @@
-# jsonelasticSearch索引模板
+# elasticSearch索引模板
 
 ## 内容
 
