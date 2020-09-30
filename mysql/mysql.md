@@ -58,6 +58,10 @@ select user,host,plugin,authentication_string from user;
 alter user 'username'@'%' identified with mysql_native_password by 'password';
 ```
 
+----
+
+
+
 ## 数据库基础相关
 
 ### 字符串默认排序规则
