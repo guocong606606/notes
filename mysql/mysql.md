@@ -4,7 +4,7 @@
 
 ### 创建用户：
 
-```sql
+```mysql
 CREATE USER 'username'@'host' IDENTIFIED BY 'password';
 ```
 
@@ -12,21 +12,23 @@ CREATE USER 'username'@'host' IDENTIFIED BY 'password';
 
 ### 授权：
 
-```sql
-GRANT privileges ON databasename.tablename TO 'username'@'host'
+```MySQL
+GRANT privileges ON databasename.tablename TO 'username'@'host';
+-- 所有权限
+GRANT privileges ON *.* TO 'username'@'%';
 ```
 
 （ privileges：权限，全给all；databasename：数据库名；tablename：可操作表权限，全给*.*）
 
 ### 删除权限：
 
-```sql
+```mysql
 REVOKE privilege ON databasename.tablename FROM 'username'@'host';
 ```
 
 ### 删除用户：
 
-```sql
+```mysql
 DROP USER 'username'@'host';
 ```
 
@@ -44,7 +46,7 @@ use mysql;
 
 查询身份验证插件：
 
-```sql
+```mysql
 select user,host,plugin,authentication_string from user;
 ```
 
@@ -54,7 +56,7 @@ select user,host,plugin,authentication_string from user;
 
 修改：
 
-```sql
+```mysql
 alter user 'username'@'%' identified with mysql_native_password by 'password';
 ```
 
@@ -77,7 +79,7 @@ alter user 'username'@'%' identified with mysql_native_password by 'password';
 
 + 方案：
 
-```sql
+```mysql
 -- 字符串类型数据排序规则修改
 SELECT
 	TABLE_SCHEMA '数据库',
