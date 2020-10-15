@@ -1,3 +1,5 @@
+
+
 # stream
 
 + 类
@@ -113,9 +115,16 @@ User result = list
     .orElse(null);
 ```
 
-## map
+## 取值
 
-+ list提取
+### 取极值
+
+```java
+list.stream().filter(e -> e != null).max(Comparator.naturalOrder()).orElse(null);
+list.stream().filter(e -> e != null).min(Comparator.naturalOrder()).orElse(null);
+```
+
+### map元素提取
 
 ```java
 // 取姓名
@@ -151,12 +160,16 @@ List<String> distinctList = nameList
 
 ### 自定义去重
 
++ 自定义去重处理器，应用断言接口，仅输出布尔类型
+
 ```java
 public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
     Map<Object, Boolean> seen = new ConcurrentHashMap<>();
     return object -> seen.putIfAbsent(keyExtractor.apply(object), Boolean.TRUE) == null;
 }
 ```
+
++ 自定义属性去重本质上是应用filter实现过滤
 
 ```java
 List<User> distinctUsers = users
@@ -191,4 +204,6 @@ result = list.stream().limit(2).collect(Collectors.toList());
 result = list.stream().skip(2).limit(2).collect(Collectors.toList());
 
 ```
+
+
 
