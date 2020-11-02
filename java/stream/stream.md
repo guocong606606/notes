@@ -124,6 +124,22 @@ list.stream().filter(e -> e != null).max(Comparator.naturalOrder()).orElse(null)
 list.stream().filter(e -> e != null).min(Comparator.naturalOrder()).orElse(null);
 ```
 
+### 计算
+
++ BigDecimal求和
+
+```java
+BigDecimal sum =list.stream().map(Entity::getValue).reduce(BigDecimal.ZERO,BigDecimal::add);
+```
+
++ int、double、long求和
+
+```java
+double sum = list.stream().mapToDouble(Entity::getValue).sum();
+```
+
+
+
 ### map元素提取
 
 ```java

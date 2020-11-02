@@ -33,11 +33,15 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 ​	修改配置文件
 
 ```properties
+# 数据库配置
 spring.datasource.platform=mysql
 db.num=1
 db.url.0=jdbc:mysql://localhost:3306/nacos?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useTimezone=true&serverTimezone=GMT%2B8
 db.user=nacos
 db.password=nacos
+
+# 启动ip配置
+nacos.inetutils.ip-address=ipAddress
 ```
 
 注：
