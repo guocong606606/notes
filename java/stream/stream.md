@@ -17,6 +17,9 @@ public class User {
 
     @ApiModelProperty("姓名")
     private String name;   
+    
+    @ApiModelProperty("性别，1男；2女")
+    private String sex;
 }
 ```
 
@@ -24,11 +27,11 @@ public class User {
 
 List<User> list = new ArrayList<>();
 User user1 = new User();
-user1.setId(1).setAge(15).setName("Axxx");
+user1.setId(1).setAge(15).setName("Axxx").setSex(1);
 User user2 = new User();
-user2.setId(1).setAge(20).setName("Mxxx");
+user2.setId(1).setAge(20).setName("Mxxx").setSex(2);
 User user3 = new User();
-user3.setId(1).setAge(25).setName("Sxxx");
+user3.setId(1).setAge(25).setName("Sxxx").setSex(1);
 list.add(user1);
 list.add(user2);
 list.add(user3);
@@ -117,27 +120,6 @@ User result = list
 
 ## 取值
 
-### 取极值
-
-```java
-list.stream().filter(e -> e != null).max(Comparator.naturalOrder()).orElse(null);
-list.stream().filter(e -> e != null).min(Comparator.naturalOrder()).orElse(null);
-```
-
-### 计算
-
-+ BigDecimal求和
-
-```java
-BigDecimal sum =list.stream().map(Entity::getValue).reduce(BigDecimal.ZERO,BigDecimal::add);
-```
-
-+ int、double、long求和
-
-```java
-double sum = list.stream().mapToDouble(Entity::getValue).sum();
-```
-
 
 
 ### map元素提取
@@ -194,7 +176,55 @@ List<User> distinctUsers = users
     .collect(Collectors.toList());
 ```
 
-## skip & limit
+## 统计计算
+
+### 计数
+
+```java
+Long count = users
+    .stream()
+    .filter(user -> nameList.contains(user.getName()))
+    .count()
+```
+
+### 计算
+
++ BigDecimal求和
+
+```java
+BigDecimal sum =list.stream().map(Entity::getValue).reduce(BigDecimal.ZERO,BigDecimal::add);
+```
+
++ int、double、long求和
+
+```java
+double sum = list.stream().mapToDouble(Entity::getValue).sum();
+```
+
+### 取极值
+
+```java
+list.stream().filter(e -> e != null).max(Comparator.naturalOrder()).orElse(null);
+list.stream().filter(e -> e != null).min(Comparator.naturalOrder()).orElse(null);
+```
+
+### 分组统计
+
++ 按性别代码分组统计
++ *SummaryStatistics ：摘要统计器，前缀指定类型，示例统计Long型，还有int，double类型的统计器
+  + 指定的类型是统计类型，即示例中第二个CollCectors的类型 ，统计后返回的count仍为long型
++ 提供了计数，求和，极值等
++ 两个CollCectors：第一个指定的是分组字段，第二个指定的是统计字段
+  + count使用分组值统计 （性别分组）
+  + Average，Sum，Max，Min按统计值统计（年龄统计）
+
+```java
+Map<Integer, IntSummaryStatistics> sexMap = list
+	.stream()
+	.collect(Collectors.groupingBy(User::getSex, CollCectors.summarizingInt(User::getAge)));
+```
+
+## 范围选取
 
 + skip 跳过元素
 + limit 取元素数
@@ -220,6 +250,5 @@ result = list.stream().limit(2).collect(Collectors.toList());
 result = list.stream().skip(2).limit(2).collect(Collectors.toList());
 
 ```
-
 
 
