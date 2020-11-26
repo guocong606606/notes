@@ -16,7 +16,7 @@ public class User {
     private Integer age;
 
     @ApiModelProperty("姓名")
-    private String name;   
+    private String name;
     
     @ApiModelProperty("性别，1男；2女")
     private String sex;
@@ -38,42 +38,56 @@ list.add(user3);
 
 ```
 
+## 流创建
+
++ 用集合创建
+
+```java
+List<String> list = Arrays.asList("a", "b", "c");
+// 创建一个顺序流
+Stream<String> stream = list.stream();
+// 创建一个并行流
+Stream<String> parallelStream = list.parallelStream();
+```
+
++ 用数组创建
+
+```java
+int[] array={1,3,5,6,8};
+IntStream stream = Arrays.stream(array);
+```
+
++ 静态方法创建
+
+```java
+Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5, 6);
+// 0，3，6，9
+Stream<Integer> stream2 = Stream.iterate(0, x -> x + 3).limit(4);
+stream2.forEach(System.out::println);
+// 三个double值
+Stream<Double> stream3 = Stream.generate(Math::random).limit(3);
+stream3.forEach(System.out::println);
+```
+
 ## sorted 排序
 
-### 自然排序
-
 + 自然排序
+  + 自然排序
 
 ```java
 list.stream().sorted();
-```
-
-+ 自然逆序
-
-```java
 list.stream().sorted(Comparator.reverseOrder());
 ```
 
-### 属性排序
-
-+ Comparater  指定字段排序
++ 属性排序
+  + Comparater  指定字段排序
 
 ```java
 // 年龄升序
 list.stream().sorted(Comparator.comparing(User::getAge));
-```
-
-+ 降序
-
-```java
 // 降序
 list.stream().sorted(Comparator.comparing(User::getAge).reversed();
-```
-
-+ 混合排序（多属性+升降序）
-
-```java
-// 年龄降序，姓名升序
+// 混合排序-- 年龄降序，姓名升序
 List<User> newList = list
                 .stream()
                 .sorted(Comparator
@@ -81,6 +95,10 @@ List<User> newList = list
                         .thenComparing(User::getName))
                 .collect(Collectors.toList());
 ```
+
+
+
+
 
 ## filter 过滤
 
@@ -118,11 +136,22 @@ User result = list
     .orElse(null);
 ```
 
-## 取值
++ 转并行流处理
+  + 数据量大时，并行流的处理速度远高于顺序流，但并行流处理数据会打乱顺序
+
+```java
+List<User> filterResult = list
+    .stream()
+    .parallel()
+    .filter(user -> user.getAge() > 10)
+    .collect(Collectors.toList());
+```
 
 
 
-### map元素提取
+## map映射
+
++ 元素提取
 
 ```java
 // 取姓名
@@ -132,18 +161,47 @@ nameList = list
     .map(User::getName)
     .collect(Collectors.toList());
 
+
+
+```
+
++ 操作
+
+```java
+// 每个元素+3
+List<Integer> intList = Arrays.asList(1, 3, 5, 7, 9);
+List<Integer> intListNew = intList.stream().map(x -> x + 3).collect(Collectors.toList());
 // 转大写（小写toLowerCase） 均可结合去重，排序等
 List<String> upperCase = new ArrayList<>();
 upperCase = nameList
     .stream()
     .map(String::toUpperCase)
     .collect(Collectors.toList());
-
 ```
 
-##  去重
+## reduce归约
 
-### distinct
+```java
+// sum = 2360
+List<Integer> list = Arrays.asList(1, 3, 23, 8, 2311, 14);
+// 三种求和方式
+Optional<Integer> sum1 = list.stream().reduce((x, y) -> x + y);
+Optional<Integer> sum2 = list.stream().reduce(Integer::sum);
+Integer sum3 = list.stream().reduce(0, Integer::sum);
+
+// 求乘积 17859408
+Optional<Integer> product = list.stream().reduce((x, y) -> x * y);
+
+// 取最大值 2311
+Optional<Integer> max1 = list.stream().reduce((x, y) -> x > y ? x : y);
+Integer max2 = list.stream().reduce(1, Integer::max);
+```
+
+
+
+##  distinct
+
++ 去重
 
 ```java
 User user4 = new User();
@@ -156,9 +214,9 @@ List<String> distinctList = nameList
     .collect(Collectors.toList());
 ```
 
-### 自定义去重
-
-+ 自定义去重处理器，应用断言接口，仅输出布尔类型
++ 自定义去重
+  + 定义去重处理器，应用断言接口，仅输出布尔类型
+  + 自定义属性去重本质上是应用filter实现过滤
 
 ```java
 public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
@@ -167,12 +225,10 @@ public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtr
 }
 ```
 
-+ 自定义属性去重本质上是应用filter实现过滤
-
 ```java
 List<User> distinctUsers = users
     .stream()
-    .filter(distinctByKey(User::getName))
+    .filter(DistinctByKey(User::getName))
     .collect(Collectors.toList());
 ```
 
@@ -211,7 +267,7 @@ list.stream().filter(e -> e != null).min(Comparator.naturalOrder()).orElse(null)
 ### 分组统计
 
 + 按性别代码分组统计
-+ *SummaryStatistics ：摘要统计器，前缀指定类型，示例统计Long型，还有int，double类型的统计器
++ *SummaryStatistics ：摘要统计器，前缀指定类型，示例统计int型，还有long，double类型的统计器
   + 指定的类型是统计类型，即示例中第二个CollCectors的类型 ，统计后返回的count仍为long型
 + 提供了计数，求和，极值等
 + 两个CollCectors：第一个指定的是分组字段，第二个指定的是统计字段
