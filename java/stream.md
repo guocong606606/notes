@@ -149,7 +149,7 @@ List<User> filterResult = list
 
 
 
-## map映射
+## map
 
 + 元素提取
 
@@ -160,9 +160,6 @@ nameList = list
     .stream()
     .map(User::getName)
     .collect(Collectors.toList());
-
-
-
 ```
 
 + 操作
@@ -178,6 +175,8 @@ upperCase = nameList
     .map(String::toUpperCase)
     .collect(Collectors.toList());
 ```
+
++ 使用map进行流处理的时候入参十Function  所以是有返回值的；如果不需要返回值，仅需要流操作的时候，可使用peek()
 
 ## reduce归约
 
