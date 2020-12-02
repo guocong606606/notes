@@ -176,7 +176,7 @@ upperCase = nameList
     .collect(Collectors.toList());
 ```
 
-+ 使用map进行流处理的时候入参十Function  所以是有返回值的；如果不需要返回值，仅需要流操作的时候，可使用peek()
++ 使用map进行流处理的时候入参是 `Function`  所以是有返回值的；如果不需要返回值，仅需要流操作的时候，可使用peek()
 
 ## reduce归约
 
