@@ -43,3 +43,11 @@
 #### JRebel for Intellij
 
 - 热部署，收费，可破解
+
+#### CSDN tools
+
++ csdn 提供的插件，idea内部可以直接使用查询资料，但目前只适合小知识点
++ json格式化，时间转换等
+
+![image-20201204155658462](idea插件收集.assets/image-20201204155658462.png)
+

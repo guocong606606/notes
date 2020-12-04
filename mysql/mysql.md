@@ -118,4 +118,10 @@ WHERE
 select count(1) as column_count from information_schema.COLUMNS where TABLE_SCHEMA='库名' and table_name = '表名'
 ```
 
+### 表字段新增
+
+```sql
+ALTER TABLE `schema`.`table_name` 
+ADD COLUMN `column_name` int(11) NULL COMMENT '描述' AFTER `column_name`;
+```
 
