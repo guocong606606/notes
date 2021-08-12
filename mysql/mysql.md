@@ -34,6 +34,22 @@ DROP USER 'username'@'host';
 
 ## 配置
 
+### 查看数据基础配置：
+
++ 查看数据库各项配置语句， 单项查询使用  like 
+
+```mysql
+show global variables;
+```
+
++ 修改配置项
+
+```mysql
+set GLOBAL wait_timeout=60;
+```
+
+
+
 ### 身份验证：
 
 MySQL8.0+ 使用的身份验证插件为caching_sha2_password ，使用数据连接工具时，须修改改为mysql_native_password；
@@ -59,6 +75,30 @@ select user,host,plugin,authentication_string from user;
 ```mysql
 alter user 'username'@'%' identified with mysql_native_password by 'password';
 ```
+
+
+
+### 数据库连接配置：
+
++ 查看当前数据库连接数
+
+```mysql
+SELECT count(*) FROM information_schema.PROCESSLIST WHERE DB = 'db_name';
+```
+
++ 结合配置项查询语句 ，查询数据库最大连接数
+
+```mysql
+show variables like '%max_connections%';
+```
+
++ 设置最大连接数，使用配置设置语句
+
+```mysql
+set global max_connections=500;
+```
+
+
 
 ----
 
