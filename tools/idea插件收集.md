@@ -43,6 +43,7 @@
 #### JRebel for Intellij
 
 - 热部署，收费，可破解
+- 日常使用关闭 XRebel （链路追踪）
 
 #### CSDN tools
 
