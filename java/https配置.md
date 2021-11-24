@@ -52,6 +52,10 @@ server:
 + 配置httpsConfig，配置tomcatWebServer
 
 ```java
+/**
+ * @author guocong
+ * @date 2021/11/17 19:00
+ */
 @Configuration
 public class HttpsConfig {
 
@@ -118,6 +122,12 @@ public class HttpsConfig {
 + 截至此时，https已经配置完毕，但核心问题没有解决，下游服务收到的仍然后是https请求，所以对网关接收到的请求做拦截处理
 
 ```java
+/**
+ * https转http拦截
+ *
+ * @author guocong
+ * @date 2021/11/17 19:54
+ */
 @Component
 public class HttpsToHttpFilter implements GlobalFilter, Ordered {
 

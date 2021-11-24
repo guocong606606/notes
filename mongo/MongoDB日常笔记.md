@@ -8,7 +8,6 @@
   + updateMany：修改范围，如果用updateOne只修改找到的第一条，一些版本用update+multi:true控制
 
 ```json
-
 db.getCollection('table_name')
 .updateMany({}, {$set:{col:NumberInt('-1')}})
 ```
