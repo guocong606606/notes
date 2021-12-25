@@ -10,15 +10,28 @@ CREATE USER 'username'@'host' IDENTIFIED BY 'password';
 
 （ host ：指定登录ip，不限制时用%）
 
+### root用户权限配置
+
+```mysql
+# 此处仅允许本地登录
+alter user 'root'@'localhost' identified by 'root';
+# 权限表刷新
+flush privileges;
+```
+
+
+
 ### 授权：
 
 ```MySQL
 GRANT privileges ON databasename.tablename TO 'username'@'host';
 -- 所有权限
 GRANT privileges ON *.* TO 'username'@'%';
+-- 如果配置权限后，仍然报出1227错误（缺失process权限）,此处db必须全给，process是一个全局性权限，不能单独指定到某一个database
+GRANT process ON *.* TO 'username'@'%';
 ```
 
-（ privileges：权限，全给all；databasename：数据库名；tablename：可操作表权限，全给*.*）
+（ privileges：权限，全给all；databasename：数据库名；tablename：可操作表权限，全给   *.*  ）
 
 ### 删除权限：
 
@@ -164,4 +177,3 @@ select count(1) as column_count from information_schema.COLUMNS where TABLE_SCHE
 ALTER TABLE `schema`.`table_name` 
 ADD COLUMN `column_name` int(11) NULL COMMENT '描述' AFTER `column_name`;
 ```
-

@@ -11,7 +11,7 @@ wslconfig /l
 + 卸载
 
 ```
-wslconfig /l name # name为查看信息显示的名字
+wslconfig /u name # name为查看信息显示的名字
 ```
 
 + tip：卸载后任务栏锁定的原有的wsl不要点，点开就重新安装原有版本了，去开始菜单里顺便也卸载一下
