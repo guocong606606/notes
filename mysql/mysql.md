@@ -2,6 +2,12 @@
 
 ## 用户：
 
+### 创建数据库：
+
+```mysql
+create database `db_name` character set utf8mb4 collate utf8mb4_general_ci;
+```
+
 ### 创建用户：
 
 ```mysql
@@ -157,6 +163,17 @@ FROM
 WHERE
 	COLLATION_NAME RLIKE 'utf8mb4_0900_ai_ci' 
 	AND TABLE_SCHEMA = 'qsc-v2-test';
+	
+-- 表排序规则修改
+SELECT
+	TABLE_SCHEMA '数据库',
+	TABLE_NAME '表',
+	TABLE_COLLATION '原排序规则',
+	CONCAT( 'ALTER TABLE ', TABLE_SCHEMA, '.', TABLE_NAME, ' COLLATE=utf8mb4_general_ci;' ) '修正SQL' 
+FROM
+	information_schema.`TABLES`
+WHERE
+	TABLE_SCHEMA RLIKE 'ayc_dev';
 ```
 
 + mark：如数据库有外键设计，此方案不适用
