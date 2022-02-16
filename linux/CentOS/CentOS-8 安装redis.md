@@ -31,3 +31,7 @@ bind 0.0.0.0
 requirepass password
 ```
 
++ systemctl 标签
+```
+redis.service
+```
