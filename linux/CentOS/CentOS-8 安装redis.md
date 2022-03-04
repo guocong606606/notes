@@ -35,3 +35,12 @@ requirepass password
 ```
 redis.service
 ```
+
+
+
++ 手动命令启动
+
+```shell
+redis-server /etc/redis.conf &
+```
+
