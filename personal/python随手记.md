@@ -33,3 +33,60 @@
 
 
 
+## http接口
+
++ 临时接收数据使用
+
++ demo
+
+  ```python
+  from flask import Flask, request, jsonify
+  
+  app = Flask(__name__)
+  
+  
+  @app.route('/py1', methods=["POST"])
+  def r_post():
+      """
+      post 接口
+      :return:
+      """
+      params = request.form if request.form else request.json
+      print(params)
+  
+      res = {"result": 'received successfully'}
+      return jsonify(content_type='application/json;charset=utf-8',
+                     reason='success',
+                     charset='utf-8',
+                     status='200',
+                     content=res)
+  
+  
+  @app.route('/py2', methods=["GET"])
+  def r_get():
+      """
+      get 接口
+      :return:
+      """
+      params = request.values
+      a = params.get("a")
+      b = params.get("b")
+      print(b + ' : ' + str(a))
+  
+      res = {"result": 'received successfully'}
+      return jsonify(content_type='application/json;charset=utf-8',
+                     reason='success',
+                     charset='utf-8',
+                     status='200',
+                     content=res)
+  
+  
+  if __name__ == '__main__':
+      app.run(host='0.0.0.0',
+              threaded=True,
+              debug=True,
+              port=1235)
+  
+  ```
+
+  
