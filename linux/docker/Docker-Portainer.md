@@ -40,14 +40,14 @@ systemctl restart docker
 ss -unlpt | grep 2375 
 ```
 
-![image-20220104145401234](D:\notes\linux\docker\Docker-Portainer.assets\image-20220104145401234.png)
+![image-20220104145401234](D:\self\linux\docker\Docker-Portainer.assets\image-20220104145401234.png)
 
 ## 多节点配置
 
-![image-20220104145547648](D:\notes\linux\docker\Docker-Portainer.assets\image-20220104145547648.png)
+![image-20220104145547648](D:\self\linux\docker\Docker-Portainer.assets\image-20220104145547648.png)
 
 + 添加信息如下
 
-![image-20220104145713590](D:\notes\linux\docker\Docker-Portainer.assets\image-20220104145713590.png)
+![image-20220104145713590](D:\self\linux\docker\Docker-Portainer.assets\image-20220104145713590.png)
 
 + 至此，可使用单节点portainer管理多个docker
