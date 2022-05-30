@@ -6,7 +6,7 @@
 
 + 多个具由docker的服务器（linux）
 + 服务器开放2375端口
-+ 其中一台服务器具由portainer容器
++ 其中一台服务器有portainer容器
 
 ```dockerfile
 docker run -d -p 8900:9000 -v /var/run/docker.sock:/var/run/docker.sock --name portainer portainer/portainer

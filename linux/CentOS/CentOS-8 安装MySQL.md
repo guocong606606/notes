@@ -14,7 +14,7 @@
 
 + Linux命令：
   + 未安装的情况下，无信息
-  + 如已安装，需要先使用yum卸载  `yum remove XXX
+  + 如已安装，需要先使用yum卸载  `yum remove XXX`
 
 ```shell
 rpm -qa | grep mysql
